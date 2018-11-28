@@ -13,30 +13,48 @@
 
 <body>
  <?php 
-	 $servername = "localhost";
-	 $username = "root";
-	 $password = "";
-	 $dbname = "bbs";
- 
-	 $conn = new mysqli($servername, $username, $password, $dbname);
- 
-	 if ($conn->connect_error){
-		die ("Connection failed: " . $conn->connect_error);
-	 }
+	$emailText = "";
+ 	if( $_SERVER['REQUEST_METHOD'] == 'POST'){
+		
+		$emailText = $_POST['EmailInput'];
 
-	 $conn->close();
+		 $servername = "localhost";
+		 $username = "root";
+		 $password = "";
+		 $dbname = "bbs";
+ 
+		 $conn = new mysqli($servername, $username, $password, $dbname);
+ 
+		 if ($conn->connect_error){
+			die ("Connection failed: " . $conn->connect_error);
+		 }
+		 $sql = "SELECT COUNT(email) AS total FROM bbusers WHERE email = '" . $_POST['EmailInput'] . "' AND password = '" . $_POST['PasswordInput'] . "'";
+		 $result = $conn->query($sql);
+		 $data = mysqli_fetch_assoc($result);
+
+		 if($data['total'] == 1){
+	 		 header("Location: http://localhost/BulletinBoard/Board.php");
+			 exit;
+		 }else{
+			echo "<div class=\"center text-center text-danger\">";
+			echo "PASSWORD IS INCORRECT";
+			echo "</div>";
+		}
+
+		 $conn->close();
+	}
  ?>
 
  <div class="container">
  	<div class="center">
 		<form method="post">
 			<div class="form-group">
-					Email: <input type="text" name="EmailInput" class="form-control" required>
+					Email: <input type="text" name="EmailInput" value="<?php echo $emailText; ?>" class="form-control" required>
 			</div>
 			<div class="form-group">
 					Password: <input type="password" name="PasswordInput" class="form-control" required>
 			</div>
-			<input type="submit" class="btn btn-primary">
+			<input type="submit" value="Sign In" class="btn btn-primary">
 		</form>
 	</div>
  </div>

@@ -39,7 +39,8 @@
 			echo "<div class=\"center text-center text-danger\">";
 			echo "EMAIL IS REGISTERED TO AN ACCOUNT";
 			echo "<br><a style=\"text-decoration:none;\" href=\"SignIn.php\">Click Here To Sign In</a>";
-			echo "</div>";		}
+			echo "</div>";
+		}
 		$conn->close();
 	}
  ?>
@@ -60,7 +61,7 @@
 			<div class="form-group">
 					Nickname: <input type="text" name="NickNameInput" class="form-control" required>
 			</div>
-			<input type="submit" class="btn btn-primary">
+			<input type="submit" value="Create Account" class="btn btn-primary">
 		</form>
 	</div>
  </div>
