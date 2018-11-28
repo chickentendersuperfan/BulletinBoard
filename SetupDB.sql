@@ -7,7 +7,7 @@ create table bbs.bbusers (
  password varchar(10),
  nickname varchar(30),
  primary key (email)
-);
+) ENGINE=InnoDB;
 create table bbs.postings (
  postId integer(5) auto_increment,
  postDate datetime,
@@ -16,5 +16,5 @@ create table bbs.postings (
  content varchar(512),
  ancestorPath varchar(100),
  primary key (postId),
-  foreign key (postedBy) references bbusers
-); 
+ foreign key (postedBy) references bbusers(email) ON UPDATE CASCADE ON DELETE SET NULL
+)ENGINE=InnoDB; 
