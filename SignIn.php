@@ -12,6 +12,19 @@
 </head>
 
 <body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<ul class="navbar-nav">
+		<li class="nav-item active">
+		  <a class="nav-link" href="Board.php">Bulletin Board</a>
+		</li>
+	</ul>
+	<ul class="navbar-nav ml-auto">
+      <li><a class="nav-link" href="Register.php">Sign Up</a></li>
+      <li><a class="nav-link" href="Signin.php">Login</a></li>
+    </ul>
+</nav>
+
  <?php 
 	$emailText = "";
  	if( $_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -33,8 +46,14 @@
 		 $data = mysqli_fetch_assoc($result);
 
 		 if($data['total'] == 1){
-	 		 header("Location: http://localhost/BulletinBoard/Board.php");
-			 exit;
+			echo "<form action=\"Board.php\" id=\"FormSignIn\" method=\"post\">";
+			echo "<input type=\"hidden\" name=\"user\" value=\"" . $_POST['EmailInput'] . "\">";
+			echo "</form>";
+
+			echo "<script>";
+			echo "document.forms[\"FormSignIn\"].submit();";
+			echo "</script>";
+
 		 }else{
 			echo "<div class=\"center text-center text-danger\">";
 			echo "PASSWORD IS INCORRECT";
@@ -47,16 +66,30 @@
 
  <div class="container">
  	<div class="center">
+		<h3>Sign In</h2>
 		<form method="post">
 			<div class="form-group">
-					Email: <input type="text" name="EmailInput" value="<?php echo $emailText; ?>" class="form-control" required>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" style="width: 90px;">Email</span>
+					</div>
+					<input type="text" name="EmailInput" value="<?php echo $emailText; ?>" class="form-control" required>
+				</div>
 			</div>
 			<div class="form-group">
-					Password: <input type="password" name="PasswordInput" class="form-control" required>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" style="width: 90px;">Password</span>
+					</div>
+				<input type="password" name="PasswordInput" class="form-control" required>
+				</div>
 			</div>
 			<input type="submit" value="Sign In" class="btn btn-primary">
 		</form>
+
 	</div>
+
  </div>
 
 
