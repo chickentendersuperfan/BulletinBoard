@@ -81,6 +81,16 @@
 		<form action="PostMessage" method="post">
 			Name:  <?php echo $name; ?> <br>
 			Email: <?php echo $_POST['user'];?>
+			<input type="hidden" name="postBy" value="<?php echo $_POST['user'];?>">
+			<div class="form-inline">
+				<label>Subject:&nbsp;</label>
+				<input type="text" class="form-control" name="postedSubject" style="width:500px;">
+			</div>
+			<div class="form-group">
+				<label>Message:</label>
+				<textarea class="form-control" rows="5" id="comment" name="content" style="width:800px;"></textarea>
+			</div>
+			<input type="submit" value="Post Message" class="btn btn-primary">
 		</form>
 	</div>
 <?php } ?>
