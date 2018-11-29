@@ -13,6 +13,18 @@
 
 <body>
 
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<ul class="navbar-nav">
+		<li class="nav-item active">
+		  <a class="nav-link" href="Board.php">Bulletin Board</a>
+		</li>
+	</ul>
+	<ul class="navbar-nav ml-auto">
+      <li><a class="nav-link" href="Register.php">Sign Up</a></li>
+      <li><a class="nav-link" href="Signin.php">Login</a></li>
+    </ul>
+</nav>
+
  <?php
 	if( $_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -35,6 +47,7 @@
 			echo "Account Created";
 			echo "<br><a style=\"text-decoration:none;\" href=\"SignIn.php\">Click Here To Sign In</a>";
 			echo "</div>";
+
 		} else{
 			echo "<div class=\"center text-center text-danger\">";
 			echo "EMAIL IS REGISTERED TO AN ACCOUNT";
@@ -50,16 +63,36 @@
 		<h3>Register</h2>
 		<form method="post">
 			<div class="form-group">
-					Email: <input type="text" name="EmailInput" class="form-control" required>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" style="width: 90px;">Email</span>
+					</div>
+					<input type="text" name="EmailInput" class="form-control" required>
+				</div>
 			</div>
 			<div class="form-group">
-					Name: <input type="text" name="NameInput" class="form-control" required>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" style="width: 90px;">Name</span>
+					</div>
+					<input type="text" name="NameInput" class="form-control" required>
+				</div>
 			</div>
 			<div class="form-group">
-					Password: <input type="password" name="PasswordInput" class="form-control" required>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" style="width: 90px;">Password</span>
+					</div>
+					<input type="password" name="PasswordInput" class="form-control" required>
+				</div>
 			</div>
 			<div class="form-group">
-					Nickname: <input type="text" name="NickNameInput" class="form-control" required>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text" style="width: 90px;">Nickname</span>
+					</div>
+					<input type="text" name="NickNameInput" class="form-control" required>
+				</div>
 			</div>
 			<input type="submit" value="Create Account" class="btn btn-primary">
 		</form>
