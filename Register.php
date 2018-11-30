@@ -185,7 +185,7 @@ body{
 		<div class="form-group">
             <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
-		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="https://www.google.com/search?q=kappa&rlz=1C1ASRM_enUS673US674&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjPj5iYyPveAhVOKa0KHa8GCyUQ_AUIDygC&biw=1920&bih=938#imgrc=4WLuJ7eulcssIM:">Terms &amp; Conditions</a>, and <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Privacy Policy</a>.</p>
+		<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="https://www.google.com/search?q=kappa&rlz=1C1ASRM_enUS673US674&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjPj5iYyPveAhVOKa0KHa8GCyUQ_AUIDygC&biw=1920&bih=938#imgrc=4WLuJ7eulcssIM:" target="_blank">Terms &amp; Conditions</a>, and <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Privacy Policy</a>.</p>
     </form>
 	<div class="text-center">Already have an account? <a href="SignIn.php">Login here</a>.</div>
 </div>
