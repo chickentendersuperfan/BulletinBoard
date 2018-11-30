@@ -45,13 +45,14 @@ session_start();
 		 if ($conn->connect_error){
 			die ("Connection failed: " . $conn->connect_error);
 		 }
-		 $sql = "SELECT COUNT(email) AS total FROM bbusers WHERE email = '" . $_POST['EmailInput'] . "' AND password = '" . $_POST['PasswordInput'] . "'";
+		 $sql = "SELECT COUNT(email), nickname AS total FROM bbusers WHERE email = '" . $_POST['EmailInput'] . "' AND password = '" . $_POST['PasswordInput'] . "'";
 		 $result = $conn->query($sql);
 		 $data = mysqli_fetch_assoc($result);
 		 $conn->close();
 
 		 if($data['total'] == 1){
 			$_SESSION['user'] = $_POST['EmailInput'];
+			$_SESSION['username'] = $data['nickname'];
 			header("Location: http://localhost/BulletinBoard/Board.php"); 
 			exit();
 
