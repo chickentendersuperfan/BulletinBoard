@@ -4,58 +4,107 @@ session_start();
 ?>
 <!DOCTYPE html>
 <head>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <style>
 .center {
     margin: auto;
 	width: 40%;
 }
+
+body{ 
+	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
+	background-repeat:no-repeat; 
+	background-position:center; 
+	background-size:cover; 
+	padding:10px;
+}
+
+.form-heading { color:#fff; font-size:23px;}
+.panel h2{ color:#444444; font-size:18px; margin:0 0 8px 0;}
+.panel p { color:#777777; font-size:14px; margin-bottom:30px; line-height:24px;}
+.login-form .form-control {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+}
+.main-div {
+  background: #ffffff none repeat scroll 0 0;
+  border-radius: 2px;
+  margin: 10px auto 30px;
+  max-width: 38%;
+  padding: 50px 70px 70px 71px;
+}
+
+.login-form .form-group {
+  margin-bottom:10px;
+}
+.login-form{ text-align:center;}
+.forgot a {
+  color: #777777;
+  font-size: 14px;
+  text-decoration: underline;
+}
+.login-form  .btn.btn-primary {
+  background: #f0ad4e none repeat scroll 0 0;
+  border-color: #f0ad4e;
+  color: #ffffff;
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+}
+.forgot {
+  text-align: left; margin-bottom:30px;
+}
+.botto-text {
+  color: #ffffff;
+  font-size: 14px;
+  margin: auto;
+}
+.login-form .btn.btn-primary.reset {
+  background: #ff9900 none repeat scroll 0 0;
+}
+.back { text-align: left; margin-top:10px;}
+.back a {color: #444444; font-size: 13px;text-decoration: none;}
 </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<ul class="navbar-nav">
-		<li class="nav-item active">
-		  <a class="nav-link" href="Board.php">Bulletin Board</a>
-		</li>
-	</ul>
-	<ul class="navbar-nav ml-auto">
-      <li><a class="nav-link" href="Register.php">Sign Up</a></li>
-      <li><a class="nav-link" href="Signin.php">Login</a></li>
-    </ul>
-</nav>
-
  <?php 
 	$emailText = "";
  	if( $_SERVER['REQUEST_METHOD'] == 'POST'){
-		
 		$emailText = $_POST['EmailInput'];
-
-		 $servername = "localhost";
-		 $username = "root";
-		 $password = "";
-		 $dbname = "bbs";
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "bbs";
  
-		 $conn = new mysqli($servername, $username, $password, $dbname);
+		$conn = new mysqli($servername, $username, $password, $dbname);
  
-		 if ($conn->connect_error){
+		if ($conn->connect_error){
 			die ("Connection failed: " . $conn->connect_error);
-		 }
-		 $sql = "SELECT COUNT(email) AS total FROM bbusers WHERE email = '" . $_POST['EmailInput'] . "' AND password = '" . $_POST['PasswordInput'] . "'";
-		 $result = $conn->query($sql);
-		 $data = mysqli_fetch_assoc($result);
-		 $conn->close();
+		}
+		$sql = "SELECT COUNT(email) AS total FROM bbusers WHERE email = '" . $_POST['EmailInput'] . "' AND password = '" . $_POST['PasswordInput'] . "'";
+		$result = $conn->query($sql);
+		$data = mysqli_fetch_assoc($result);
+		$conn->close();
 
-		 if($data['total'] == 1){
+		if($data['total'] == 1){
 			$_SESSION['user'] = $_POST['EmailInput'];
 			header("Location: http://localhost/BulletinBoard/Board.php"); 
 			exit();
 
-		 }else{
+		}else{
 			echo "<div class=\"center text-center text-danger\">";
 			echo "PASSWORD IS INCORRECT";
 			echo "</div>";
@@ -65,38 +114,30 @@ session_start();
 	}
  ?>
 
- <div class="container">
- 	<div class="center">
-		<h3>Sign In</h2>
-		<form method="post">
-			<div class="form-group">
 
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" style="width: 90px;">Email</span>
-					</div>
-					<input type="text" name="EmailInput" value="<?php echo $emailText; ?>" class="form-control" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" style="width: 90px;">Password</span>
-					</div>
-				<input type="password" name="PasswordInput" class="form-control" required>
-				</div>
-			</div>
-			<input type="submit" value="Sign In" class="btn btn-primary">
-		</form>
-
-	</div>
-
- </div>
-
-
+<div class="container" align="center">
+	<h1 style="font-size:100px" class="form-heading">tBoard</h1>
+<div class="login-form">
+<div class="main-div">
+   <div class="panel">
+   <h2>User Login</h2>
+   <p>Please enter your email and password</p>
+   </div>
+    <form id="Login" method="POST">
+        <div class="form-group">
+            <input type="email" class="form-control" name="EmailInput" value="<?php echo $emailText; ?>" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="PasswordInput" placeholder="Password">
+        </div>
+        <button type="submit" name="submitbtn" class="btn btn-primary">Login</button>
+        <div class="forgot">
+        	<br><a href="reset.html">Forgot password?</a> - <a href="Register.php">Create Account</a>
+		</div>
+    </form>
+</div>
+</div></div></div>
  
 	
 </body>
-
-
 </html>
