@@ -13,13 +13,12 @@ create table bbs.bbusers (
 create table bbs.postings (
  message_id 	integer(10) NOT NULL AUTO_INCREMENT,
  poster_id 		integer(10) NOT NULL,
- topic_id 		integer(10) NOT NULL,
  postedBy 		varchar(50) NOT NULL,
  subject 		varchar(100),
  content 		varchar(512) NOT NULL,
  date 			timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  parent_id		int(10) NOT NULL,	-- references the poster_id / ancestor
- message_block 	int(10) ,			
+ message_block 	int(10) ,
  primary key (message_id),
  foreign key (poster_id) references bbusers(user_id) ON UPDATE CASCADE 
 ) ENGINE=InnoDB; 
