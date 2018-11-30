@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -16,33 +20,29 @@
 	<ul class="navbar-nav">
 		
 		<?php 
-			if( $_SERVER['REQUEST_METHOD'] == 'POST'){
-
-				echo "<form action=\"Board.php\" id=\"FormHome\" method=\"post\">";
-				echo "<input type=\"hidden\" name=\"user\" value=\"" . $_POST['user'] . "\">";
-				echo "<li class=\"nav-item active\">";
-					echo "<a class=\"nav-link\" href=\"javascript:{}\" onclick=\"document.getElementById('FormHome').submit(); return false;\">Bulletin Board</a>";
-				echo "</li>";
-				echo "</form>";
+			echo "<li class=\"nav-item active\">";
+					echo "<a class=\"nav-link\" href=\"Board.php\">Bulletin Board</a>";
+			echo "</li>";
+			if(isset($_SESSION['user'])){
 
 				echo "<li class=\"nav-item\">
-						<a class=\"nav-link\">User: " . $_POST['user'] . "</a>" .
+						<a class=\"nav-link\">User: " . $_SESSION['user'] . "</a>" .
 					 "</li>";
-			}
-			else{
-				echo "<li class=\"nav-item active\">";
-					echo "<a class=\"nav-link\" href=\"Board.php\">Bulletin Board</a>";
-				echo "</li>";
 			}
 		?>
 	</ul>
 	<ul class="navbar-nav ml-auto">
-      <li><a class="nav-link" href="Register.php">Sign Up</a></li>
-      <li><a class="nav-link" href="Signin.php">Login</a></li>
-
 	  <?php 
-		if( $_SERVER['REQUEST_METHOD'] == 'POST'){
-			echo "<li><a class=\"nav-link\" href=\"Board.php\">Logout</a></li>";
+		if(isset($_SESSION['user'])){
+			echo "<form action=\"Logout.php\" id=\"FormLogout\" method=\"post\">";
+				echo "<li class=\"nav-item\">";
+					echo "<a class=\"nav-link\" href=\"javascript:{}\" onclick=\"document.getElementById('FormLogout').submit(); return false;\">Logout</a>";
+				echo "</li>";
+				echo "</form>";
+		}
+		else{
+			echo "<li><a class=\"nav-link\" href=\"Register.php\">Sign Up</a></li>";
+			echo "<li><a class=\"nav-link\" href=\"Signin.php\">Login</a></li>";
 		}
 	  ?>
 	  
@@ -61,9 +61,9 @@
 	die ("Connection failed: " . $conn->connect_error);
 	}
 
-	if( $_SERVER['REQUEST_METHOD'] == 'POST'){
+	if(isset($_SESSION['user'])){
 
-		$sql_GetName = "SELECT name FROM bbusers WHERE email = '" . $_POST['user'] . "'";
+		$sql_GetName = "SELECT name FROM bbusers WHERE email = '" . $_SESSION['user'] . "'";
 		$result_GetName = $conn->query($sql_GetName);
 		mysqli_data_seek($result_GetName,0);
 		$name = mysqli_fetch_row($result_GetName)[0];
@@ -75,13 +75,13 @@
 
 <div class="container"> 
  <?php 
-	if( $_SERVER['REQUEST_METHOD'] == 'POST'){
+	if(isset($_SESSION['user'])){
  ?>
 	<div>
 		<form action="PostMessage" method="post">
 			Name:  <?php echo $name; ?> <br>
-			Email: <?php echo $_POST['user'];?>
-			<input type="hidden" name="postBy" value="<?php echo $_POST['user'];?>">
+			Email: <?php echo $_SESSION['user'];?>
+			<input type="hidden" name="postBy" value="<?php echo $_SESSION['user'];?>">
 			<div class="form-inline">
 				<label>Subject:&nbsp;</label>
 				<input type="text" class="form-control" name="postedSubject" style="width:500px;">
