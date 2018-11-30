@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -44,15 +48,12 @@
 		 $sql = "SELECT COUNT(email) AS total FROM bbusers WHERE email = '" . $_POST['EmailInput'] . "' AND password = '" . $_POST['PasswordInput'] . "'";
 		 $result = $conn->query($sql);
 		 $data = mysqli_fetch_assoc($result);
+		 $conn->close();
 
 		 if($data['total'] == 1){
-			echo "<form action=\"Board.php\" id=\"FormSignIn\" method=\"post\">";
-			echo "<input type=\"hidden\" name=\"user\" value=\"" . $_POST['EmailInput'] . "\">";
-			echo "</form>";
-
-			echo "<script>";
-			echo "document.forms[\"FormSignIn\"].submit();";
-			echo "</script>";
+			$_SESSION['user'] = $_POST['EmailInput'];
+			header("Location: http://localhost/BulletinBoard/Board.php"); 
+			exit();
 
 		 }else{
 			echo "<div class=\"center text-center text-danger\">";
@@ -60,7 +61,7 @@
 			echo "</div>";
 		}
 
-		 $conn->close();
+		 
 	}
  ?>
 
