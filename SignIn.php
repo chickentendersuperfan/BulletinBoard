@@ -105,9 +105,7 @@ body{
 			exit();
 
 		}else{
-			echo "<div class=\"center text-center text-danger\">";
-			echo "PASSWORD IS INCORRECT";
-			echo "</div>";
+			header("location: SignIn.php?error=1");
 		}
 
 		 
@@ -116,27 +114,36 @@ body{
 
 
 <div class="container" align="center">
-	<h1 style="font-size:100px" class="form-heading">tBoard</h1>
+	<h1 class="display-1">tBoard</h1>
+
 <div class="login-form">
-<div class="main-div">
-   <div class="panel">
-   <h2>User Login</h2>
-   <p>Please enter your email and password</p>
-   </div>
-    <form id="Login" method="POST">
-        <div class="form-group">
-            <input type="email" class="form-control" name="EmailInput" value="<?php echo $emailText; ?>" placeholder="Email Address">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" name="PasswordInput" placeholder="Password">
-        </div>
-        <button type="submit" name="submitbtn" class="btn btn-primary">Login</button>
-        <div class="forgot">
-        	<br><a href="reset.html">Forgot password?</a> - <a href="Register.php">Create Account</a>
-		</div>
-    </form>
+	<div class="main-div">
+	   <div class="panel">
+	   		<h2>User Login</h2>
+	   		<p>Please enter your email and password</p>
+	   </div>
+	    <form id="Login" method="POST">
+	        <div class="form-group">
+	            <input type="email" class="form-control" name="EmailInput" value="<?php echo $emailText; ?>" placeholder="Email Address">
+	        </div>
+	        <div class="form-group">
+	            <input type="password" class="form-control" name="PasswordInput" placeholder="Password">
+	        </div>
+	        <button type="submit" name="submitbtn" class="btn btn-primary">Login</button>
+	         <?php 
+		    	if(isset($_GET['error'])==1 ) {
+		    		echo "<div class=\"center text-center text-danger\">";
+					echo "Incorrect email or password";
+					echo "</div>";
+		    	}
+	    	?>
+	        <div class="forgot" align="center">
+	        	<br><center><a href="reset.html">Forgot password?</a> - <a href="Register.php">Create Account</a></center>
+			</div>
+	    </form>
+
+	</div>
 </div>
-</div></div></div>
  
 	
 </body>
