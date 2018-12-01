@@ -13,8 +13,20 @@ session_start();
 	width: 40%;
 }
 
+html, body {
+    height:100%;
+} 
+
+body{ 
+	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
+	background-repeat:no-repeat; 
+	background-position:center; 
+	background-size:cover; 
+	padding:10px;
+}
+
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-   background-color: #D9EDF7;
+   background-color: #FFFAF0;
 }
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
@@ -29,7 +41,7 @@ session_start();
 		
 		<?php 
 			echo "<li class=\"nav-item active\">";
-					echo "<a class=\"nav-link\" href=\"Board.php\">Bulletin Board</a>";
+					echo "<a class=\"nav-link\" href=\"Board.php\">tBoard</a>";
 			echo "</li>";
 			if(isset($_SESSION['user'])){
 

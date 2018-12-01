@@ -13,6 +13,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
 <style type="text/css">
+
+html, body {
+    height:100%;
+} 
+
 body{ 
 	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
 	background-repeat:no-repeat; 
