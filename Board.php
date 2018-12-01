@@ -26,12 +26,15 @@ body{
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-   background-color: #FFFAF0;
+   background-color: #FDEDEC;
 }
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
-   background-color: #ECECEC;
+   background-color: #EAECEE;
 }
+
+
+
 </style>
 </head>
 
