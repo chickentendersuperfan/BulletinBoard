@@ -20,9 +20,10 @@ html, body {
 
 body{ 
 	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
-	background-repeat:no-repeat; 
-	background-position:center; 
-	background-size:cover; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	padding:10px;
 }
 /*body {
