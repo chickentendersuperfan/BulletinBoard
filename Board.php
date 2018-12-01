@@ -19,24 +19,77 @@ html, body {
 
 body{ 
 	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
-	background-repeat:no-repeat; 
-	background-position:center; 
-	background-size:cover; 
-	padding:10px;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-   background-color: #FFFAF0;
+   background-color: #FDEDEC;
 }
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
-   background-color: #ECECEC;
+   background-color: #EAECEE;
 }
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: sticky;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 </style>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="opacity: 0.8;">
 	<ul class="navbar-nav">
 		
 		<?php 
@@ -99,12 +152,12 @@ body{
  ?>
 
 
-<div class="container-fluid" style="margin-top:80px;"> 
-<div>
+<div class="container-fluid" style="padding:10px"> 
+<div id="divTable">
 <?php if($result_GetPosts->num_rows > 0) { ?>
 	<table class="table table-bordered table-striped" style="border:1px;">
 	<thead>
-		<tr class="bg-dark" style="color:white;">
+		<tr class="bg-dark" style="color:white;opacity: 0.8;">
 		<td style="font-weight:bold;width:50%;">Subject</td>
 		<td style="font-weight:bold;width:27%;">Posted By</td>
 		<td style="font-weight:bold;width:3$;"><i class="fas fa-comments" style="font-size:24px"></i></td>
@@ -123,30 +176,48 @@ body{
 	<tbody>
 	</table>
 <?php } ?>
-
-
 </div>
+
  <?php 
 	if(isset($_SESSION['user'])){
  ?>
+	<div id="myModal" style="display:none;">
+		<div class="modal-content">
+			<span class="close" onclick="closeForm()">&times;</span>
+			<form action="PostMessage.php" method="post">
+				Name:  <?php echo $_SESSION['username']; ?> <br>
+				Email: <?php echo $_SESSION['user'];?>
+				<input type="hidden" name="postBy" value="<?php echo $_SESSION['user'];?>">
+				<div class="form-inline">
+					<label>Subject:&nbsp;</label>
+					<input type="text" class="form-control" name="postedSubject" style="width:500px;" required>
+				</div>
+				<div class="form-group">
+					<label>Message:</label>
+					<textarea class="form-control" rows="5" id="comment" name="content" style="width:800px;" required></textarea>
+				</div>
+				<input type="submit" value="Post Message" class="btn btn-primary">
+			</form>
+		</div>
+	</div>
 	<div>
-		<form action="PostMessage.php" method="post">
-			Name:  <?php echo $_SESSION['username']; ?> <br>
-			Email: <?php echo $_SESSION['user'];?>
-			<input type="hidden" name="postBy" value="<?php echo $_SESSION['user'];?>">
-			<div class="form-inline">
-				<label>Subject:&nbsp;</label>
-				<input type="text" class="form-control" name="postedSubject" style="width:500px;" required>
-			</div>
-			<div class="form-group">
-				<label>Message:</label>
-				<textarea class="form-control" rows="5" id="comment" name="content" style="width:800px;" required></textarea>
-			</div>
-			<input type="submit" value="Post Message" class="btn btn-primary">
-		</form>
+	<button id="buttonOpenForm" class="open-button bg-dark" onclick="openForm()">Post Message</button>
 	</div>
 <?php } ?>
 </div>
+
+<script>
+function openForm(){
+	document.getElementById('myModal').style.display ="block";
+	document.getElementById('divTable').style.display ="none";
+	document.getElementById('buttonOpenForm').style.display ="none";
+};
+function closeForm(){
+	document.getElementById('myModal').style.display ="none";
+	document.getElementById('divTable').style.display ="block";
+	document.getElementById('buttonOpenForm').style.display ="block";
+};
+</script>
 
 </body>
 
