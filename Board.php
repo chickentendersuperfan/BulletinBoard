@@ -18,19 +18,19 @@ html, body {
 } 
 
 body{ 
-	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
+	background-image:url("http://localhost/BulletinBoard/bg"); 
 	-webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-   background-color: #FDEDEC;
+   background-color: rgba(0,0,0,0.4);
 }
 
 .table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(even) > th {
-   background-color: #EAECEE;
+   background-color: rgba(0,0,0,0);
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
@@ -152,10 +152,10 @@ body{
  ?>
 
 
-<div class="container-fluid" style="padding:10px"> 
-<div id="divTable">
+<div class="container-fluid" style="padding:10px;"> 
+<div id="divTable" style="background-color: rgba(0,0,0,0.4);">
 <?php if($result_GetPosts->num_rows > 0) { ?>
-	<table class="table table-bordered table-striped" style="border:1px;">
+	<table class="table table-bordered table-striped" style="border:1px;color:white;">
 	<thead>
 		<tr class="bg-dark" style="color:white;opacity: 0.8;">
 		<td style="font-weight:bold;width:50%;">Subject</td>
@@ -167,7 +167,7 @@ body{
 	<tbody>
     <?php while($row = $result_GetPosts->fetch_assoc()) { ?>
 		<tr>
-			<td><a <?php echo "href=\"Post.php?PostID=" . $row['message_id'] ."\""; ?> style="text-decoration:none;"> <?php echo $row['subject']; ?> </a></td>
+			<td><a <?php echo "href=\"Post.php?PostID=" . $row['message_id'] ."\""; ?> style="text-decoration:none;color:Azure;"> <?php echo $row['subject']; ?> </a></td>
 			<td><?php echo $row['postedBy'] ?></td>
 			<td><?php echo $row['reply'] ?></td>
 			<td><?php echo $row['date'] ?></td>
@@ -181,7 +181,7 @@ body{
  <?php 
 	if(isset($_SESSION['user'])){
  ?>
-	<div id="myModal" style="display:none;">
+	<div id="myModal" class="modal" style="display:none;">
 		<div class="modal-content">
 			<span class="close" onclick="closeForm()">&times;</span>
 			<form action="PostMessage.php" method="post">
