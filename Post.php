@@ -66,6 +66,10 @@ session_start();
 		}
 		$conn->close();
 	}
+
+	if(isset($_SESSION['user'])){
+		$_SESSION['opID'] =  $_GET['PostID'];
+	}
 ?>
 
 <!DOCTYPE html>

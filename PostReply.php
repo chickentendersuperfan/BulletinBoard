@@ -36,7 +36,7 @@ session_start();
 	
 <body>
 	<form id="myForm" action="Post.php" method="get">
-		<input type="hidden" name="PostID" value="<?php echo $_POST['parent_id']; ?>">	
+		<input type="hidden" name="PostID" value="<?php echo $_SESSION['opID']; ?>">	
 	</form>
 	<script>
 		document.getElementById('myForm').submit();
