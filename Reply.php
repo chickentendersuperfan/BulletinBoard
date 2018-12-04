@@ -76,18 +76,18 @@ body{
 
  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="opacity: 0.8;">
 	<ul class="navbar-nav">
-		
 		<?php 
-			echo "<li class=\"nav-item active\">";
-					echo "<a class=\"nav-link\" href=\"Board.php\">tBoard</a>";
-			echo "</li>";
-			if(isset($_SESSION['user'])){
-
-				echo "<li class=\"nav-item\">
-						<a class=\"nav-link\">User: " . $_SESSION['username'] . "</a>" .
-					 "</li>";
-			}
-		?>
+            echo "<li class=\"nav-item active\">";
+            echo "<a class=\"nav-link\" href=\"Board.php\">
+					<div>
+						<img border=\"0\" src=\"http://localhost/BulletinBoard/images/elephant\" width=\"45\" height=\"45\">
+					</div>
+					<div>
+						tBoard
+					</div>
+					</a>";
+            echo "</li>";
+        ?>
 	</ul>
 	<ul class="navbar-nav ml-auto">
 	  <?php 
