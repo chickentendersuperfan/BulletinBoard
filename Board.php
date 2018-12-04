@@ -186,7 +186,6 @@ body{
 			<span class="close" onclick="closeForm()">&times;</span>
 			<form action="PostMessage.php" method="post">
 				Name:  <?php echo $_SESSION['username']; ?> <br>
-				Email: <?php echo $_SESSION['user'];?>
 				<input type="hidden" name="postBy" value="<?php echo $_SESSION['user'];?>">
 				<div class="form-inline">
 					<label>Subject:&nbsp;</label>
