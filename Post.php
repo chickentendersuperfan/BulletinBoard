@@ -107,6 +107,45 @@ body{
   width: 280px;
 }
 
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 div.post{
 	min-height: 100px;
 	border-radius: 25px;
@@ -206,6 +245,49 @@ div.op{
 	</table>
 </div>
 <?php } ?>
+ <?php 
+
+ // Reply to the original post, but not a specific comment (yet)
+	if(isset($_SESSION['user'])){
+ ?>
+	<div id="myModal" class="modal" style="display:none;">
+		<div class="modal-content">
+			<span class="close" onclick="closeForm()">&times;</span>
+			<form action="Reply.php?PostID=" <?php echo $_GET['PostID']; ?> method="post">
+				Name:  <?php echo $_SESSION['username']; ?> <br>
+				Email: <?php echo $_SESSION['user'];?>
+				<input type="hidden" name="postBy" value="<?php echo $_SESSION['user'];?>">
+				<div class="form-inline">
+					<label>Subject:&nbsp;</label>
+					<input type="text" class="form-control" name="postedSubject" style="width:500px;" required>
+				</div>
+				<div class="form-group">
+					<label>Message:</label>
+					<textarea class="form-control" rows="5" id="comment" name="content" style="width:800px;" required></textarea>
+				</div>
+				<input type="submit" value="Post Reply" class="btn btn-primary">
+			</form>
+		</div>
+	</div>
+	<div>
+	<button id="buttonOpenForm" class="open-button bg-dark" onclick="openForm()">Reply</button>
+	</div>
+<?php } ?>
+</div>
+
+<script>
+function openForm(){
+	document.getElementById('myModal').style.display ="block";
+	document.getElementById('divTable').style.display ="none";
+	document.getElementById('buttonOpenForm').style.display ="none";
+};
+function closeForm(){
+	document.getElementById('myModal').style.display ="none";
+	document.getElementById('divTable').style.display ="block";
+	document.getElementById('buttonOpenForm').style.display ="block";
+};
+</script>
+
 </body>
 
 
