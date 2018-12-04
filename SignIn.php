@@ -22,7 +22,7 @@ html, body {
 }
 
 body{ 
-	background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg"); 
+	background-image:url("http://localhost/BulletinBoard/images/bg"); 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -127,7 +127,10 @@ body{
 
 
 <div class="container" align="center">
-	<h1 class="display-1">tBoard</h1>
+    <a href="SignIn.php">
+        <img border="0" src="http://localhost/BulletinBoard/images/elephant" width="100" height="100">
+    </a>
+	<h1 class="display-6">tBoard</h1>
 
 <div class="login-form">
 	<div class="main-div">
@@ -151,11 +154,12 @@ body{
 		    	}
 	    	?>
 	        <div class="forgot" align="center">
-	        	<br><center><a href="reset.html">Forgot password?</a> - <a href="Register.php">Create Account</a></center>
+	        	<br><center><a href="Register.php">Create Account</a></center>
 			</div>
 	    </form>
 
 	</div>
+</div>
 </div>
  
 	

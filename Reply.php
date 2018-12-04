@@ -40,7 +40,7 @@ html, body {
 }
 
 body{ 
-	background-image:url("http://localhost/BulletinBoard/bg"); 
+	background-image:url("http://localhost/BulletinBoard/images/bg"); 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;

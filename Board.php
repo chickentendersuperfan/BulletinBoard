@@ -18,7 +18,7 @@ html, body {
 } 
 
 body{ 
-	background-image:url("http://localhost/BulletinBoard/bg"); 
+	background-image:url("http://localhost/BulletinBoard/images/bg"); 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -91,22 +91,23 @@ body{
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="opacity: 0.8;">
 	<ul class="navbar-nav">
-		
-		<?php 
-			echo "<li class=\"nav-item active\">";
-					echo "<a class=\"nav-link\" href=\"Board.php\">tBoard</a>";
-			echo "</li>";
-			if(isset($_SESSION['user'])){
-
-				echo "<li class=\"nav-item\">
-						<a class=\"nav-link\">User: " . $_SESSION['username'] . "</a>" .
-					 "</li>";
-			}
-		?>
+        <p>
+            <a href="Board.php">
+                <img border="0" src="http://localhost/BulletinBoard/images/elephant" width="75" height="75">
+            </a>
+        </p>
+        <?php 
+            echo "<li class=\"nav-item active\">";
+            echo "<br><br><a class=\"nav-link\" href=\"Board.php\">tBoard</a>";
+            echo "</li>";
+        ?>
 	</ul>
 	<ul class="navbar-nav ml-auto">
 	  <?php 
 		if(isset($_SESSION['user'])){
+            echo "<li class=\"nav-item\">
+                        <a class=\"nav-link\">User: " . $_SESSION['username'] . "</a>" .
+                     "</li>";
 			echo "<form action=\"Logout.php\" id=\"FormLogout\" method=\"post\">";
 				echo "<li class=\"nav-item\">";
 					echo "<a class=\"nav-link\" href=\"javascript:{}\" onclick=\"document.getElementById('FormLogout').submit(); return false;\">Logout</a>";
@@ -143,7 +144,7 @@ body{
 	}
 
 	$sql_GetPosts = "SELECT t1.message_id, t1.poster_id, t1.postedBy, t1.subject, t1.date, 
-					(SELECT COALESCE((SELECT COUNT(message_id) FROM postings WHERE parent_id = t1.message_id group by parent_id),0)) AS reply FROM postings t1 WHERE parent_id = 0";
+					(SELECT COALESCE((SELECT COUNT(message_id) FROM postings WHERE parent_id = t1.message_id group by parent_id),0)) AS reply FROM postings t1 WHERE parent_id = 0 ORDER BY date desc";
 
 	
 	$result_GetPosts = $conn->query($sql_GetPosts);
@@ -155,7 +156,7 @@ body{
 <div class="container-fluid" style="padding:10px;"> 
 <div id="divTable" style="background-color: rgba(0,0,0,0.4);">
 <?php if($result_GetPosts->num_rows > 0) { ?>
-	<table class="table table-bordered table-striped" style="border:1px;color:white;">
+	<table class="table table-bordered table-striped table-hover" style="border:5px;color:white;">
 	<thead>
 		<tr class="bg-dark" style="color:white;opacity: 0.8;">
 		<td style="font-weight:bold;width:50%;">Subject</td>
@@ -195,12 +196,12 @@ body{
 					<label>Message:</label>
 					<textarea class="form-control" rows="5" id="comment" name="content" style="width:800px;" required></textarea>
 				</div>
-				<input type="submit" value="Post Message" class="btn btn-primary">
+				<input type="submit" value="Submit new post" class="btn btn-primary">
 			</form>
 		</div>
 	</div>
 	<div>
-	<button id="buttonOpenForm" class="open-button bg-dark" onclick="openForm()">Post Message</button>
+	<button id="buttonOpenForm" class="open-button bg-dark" onclick="openForm()">Submit a new text post</button>
 	</div>
 <?php } ?>
 </div>

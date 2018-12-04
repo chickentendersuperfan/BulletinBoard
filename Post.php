@@ -89,7 +89,7 @@ html, body {
 }
 
 body{ 
-	background-image:url("http://localhost/BulletinBoard/bg"); 
+	background-image:url("http://localhost/BulletinBoard/images/bg"); 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -147,24 +147,25 @@ div.op{
 </head>
 
 <body>
- <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="opacity: 0.8;">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="opacity: 0.8;">
 	<ul class="navbar-nav">
-		
-		<?php 
-			echo "<li class=\"nav-item active\">";
-					echo "<a class=\"nav-link\" href=\"Board.php\">tBoard</a>";
-			echo "</li>";
-			if(isset($_SESSION['user'])){
-
-				echo "<li class=\"nav-item\">
-						<a class=\"nav-link\">User: " . $_SESSION['username'] . "</a>" .
-					 "</li>";
-			}
-		?>
+        <p>
+            <a href="Board.php">
+                <img border="0" src="http://localhost/BulletinBoard/images/elephant" width="75" height="75">
+            </a>
+        </p>
+        <?php 
+            echo "<li class=\"nav-item active\">";
+            echo "<br><br><a class=\"nav-link\" href=\"Board.php\">tBoard</a>";
+            echo "</li>";
+        ?>
 	</ul>
 	<ul class="navbar-nav ml-auto">
 	  <?php 
 		if(isset($_SESSION['user'])){
+            echo "<li class=\"nav-item\">
+                        <a class=\"nav-link\">User: " . $_SESSION['username'] . "</a>" .
+                     "</li>";
 			echo "<form action=\"Logout.php\" id=\"FormLogout\" method=\"post\">";
 				echo "<li class=\"nav-item\">";
 					echo "<a class=\"nav-link\" href=\"javascript:{}\" onclick=\"document.getElementById('FormLogout').submit(); return false;\">Logout</a>";
