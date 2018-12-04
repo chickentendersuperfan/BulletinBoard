@@ -18,7 +18,6 @@ create table bbs.postings (
  content 		varchar(512) NOT NULL,
  date 			timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  parent_id		int(10) NOT NULL,	-- references the poster_id / ancestor
- message_block 	int(10) ,
  primary key (message_id),
  foreign key (poster_id) references bbusers(user_id) ON UPDATE CASCADE 
 ) ENGINE=InnoDB; 

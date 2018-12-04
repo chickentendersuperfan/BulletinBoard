@@ -22,8 +22,8 @@ session_start();
 		$nickname = $row['nickname'];
 		$user_id = $row['user_id'];
 		
-		$sql_insert = "INSERT INTO bbs.postings (poster_id, postedBy, subject, content, parent_id, message_block) ".
-					  "VALUES (" . $user_id . ", \"" . $nickname . "\", \"" . $_POST['postedSubject'] . "\", \"" . $_POST['content'] . "\" , 0, 1);";
+		$sql_insert = "INSERT INTO bbs.postings (poster_id, postedBy, subject, content, parent_id) ".
+					  "VALUES (" . $user_id . ", \"" . $nickname . "\", \"" . $_POST['postedSubject'] . "\", \"" . $_POST['content'] . "\" , 0);";
 
 		$conn->query($sql_insert);
 		

@@ -26,28 +26,35 @@ session_start();
 							$opMessage = $result_GetParentPost->fetch_assoc();
 							echo "<div class=\"row op\">";
 								echo "<div class=\"col-md-4\">";
-									echo "<p>Posted By: " . $opMessage['postedBy'] . " on " . $opMessage['date'] . "</p>";
+									echo "<p>Reply To Post By: " . $opMessage['postedBy'] . " on " . $opMessage['date'] . "</p>";
 								echo "</div>";
-								echo "<div class=\"col-md-8\">";
-									echo "<p>";
+								echo "<div class=\"col-md-8\" style=\"word-wrap:break-word;width:200px;\">";
+									
 										echo "Subject:&nbsp;&nbsp;&nbsp;" . $opMessage['subject'] . "<br>";
+										echo "<p>";
 										echo "Message:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 										echo $opMessage['content'];
-									echo "</p>";
+										echo "</p>";
 
 								echo "</div>";
 							echo "</div>";
 							echo "<br>";
 							echo "<div class=\"row\" style=\"padding-left: 20px;\">";
 								echo "<div class=\"col-md-4\">";
-									echo "<p> Reply From: " . $row['postedBy'] . " on " . $row['date'] . "</p>";
+									echo "<p>Reply From: " . $row['postedBy'] . " on " . $row['date'] . "</p>";
+									if(isset($_SESSION['user'])){
+										echo "<div id=\"reply\">";
+											echo "<input type=\"submit\" value=\"Reply\" class=\"btn\" onclick=\"replyToMessage(" . $row['message_id'] . ");\">";
+										echo "</div>";
+									}
 								echo "</div>";
-								echo "<div class=\"col-md-8\">";
-									echo "<p>";
+								echo "<div class=\"col-md-8\" style=\"word-wrap:break-word;width:200px;\">";
+									
 										echo "Subject:&nbsp;&nbsp;&nbsp;" . $row['subject'] . "<br>";
+										echo "<p>";
 										echo "Message:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 										echo $row['content'];
-									echo "</p>";
+										echo "</p>";
 								echo "</div>";
 							echo "</div>";	
 						echo "</div>";
@@ -120,7 +127,16 @@ div.op{
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+#reply{
+	position: absolute;
+	bottom: 0;
+}
 
+#replyOP{
+	position: absolute;
+	bottom: 0;
+	left: 5%;
+}
 
 </style>
 
@@ -187,6 +203,11 @@ div.op{
 		<div class="row">
 			<div class="col-md-4">
 				<p>Posted By: <?php echo $message['postedBy'] . " on " . $message['date'];?></p>
+				<?php if(isset($_SESSION['user'])){ ?>
+					<div id="replyOP">
+						<input type="submit" value="Reply" class="btn" onclick="replyToMessage( <?php echo $message['message_id']; ?>)">
+					</div>
+				<?php } ?>
 			</div>
 			<div class="col-md-8">
 				<p>
@@ -206,7 +227,26 @@ div.op{
 	</table>
 </div>
 <?php } ?>
-</body>
 
+<script>
+function replyToMessage(opPostID){
+	var form = document.createElement("FORM");
+	form.name   = 'replyForm';
+	form.method = 'GET';
+	form.action = 'Reply.php';
+
+	var input = document.createElement("INPUT");
+	input.type  = 'HIDDEN';
+	input.name  = 'PostID';
+	input.value = opPostID;
+	
+	form.appendChild(input);
+
+	document.body.appendChild(form);
+
+	form.submit();
+}
+</script>
+</body>
 
 </html>
