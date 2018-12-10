@@ -212,10 +212,10 @@ body{
 	}
 
 	if(isset($_GET['filter']) && strpos($_GET['filter'], ';') == false){
-		$sql_GetPosts = "SELECT t1.message_id, t1.poster_id, t1.postedBy, t1.subject, t1.date FROM postings t1 WHERE parent_id = 0 AND t1.subject LIKE '%" . $_GET['filter'] ."%' ORDER BY date desc";
+		$sql_GetPosts = "SELECT t1.message_id, t1.poster_id, t1.postedBy, t1.subject, t1.date FROM postings t1 WHERE parent_id = 0 AND t1.subject LIKE '%" . $_GET['filter'] ."%' ORDER BY date";
 	}
 	else{
-		$sql_GetPosts = "SELECT t1.message_id, t1.poster_id, t1.postedBy, t1.subject, t1.date FROM postings t1 WHERE parent_id = 0 ORDER BY date desc";
+		$sql_GetPosts = "SELECT t1.message_id, t1.poster_id, t1.postedBy, t1.subject, t1.date FROM postings t1 WHERE parent_id = 0 ORDER BY date";
 	}
 
 
