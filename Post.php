@@ -25,10 +25,10 @@ session_start();
 							$result_GetParentPost = $conn->query($sql_GetParentPost);
 							$opMessage = $result_GetParentPost->fetch_assoc();
 							echo "<div class=\"row op\">";
-								echo "<div class=\"col-md-4\">";
+								echo "<div class=\"col-md-3\">";
 									echo "<p>Reply To Post By: " . $opMessage['postedBy'] . " on " . $opMessage['date'] . "</p>";
 								echo "</div>";
-								echo "<div class=\"col-md-8\" style=\"word-wrap:break-word;width:200px;\">";
+								echo "<div class=\"col-md-9\" style=\"word-wrap:break-word;width:200px;\">";
 									
 										echo "Subject:&nbsp;&nbsp;&nbsp;" . $opMessage['subject'] . "<br>";
 										echo "<p>";
@@ -40,13 +40,9 @@ session_start();
 							echo "</div>";
 							echo "<br>";
 							echo "<div class=\"row\" style=\"padding-left: 20px;\">";
-								echo "<div class=\"col-md-4\">";
+								echo "<div class=\"col-md-3\">";
 									echo "<p>Reply From: " . $row['postedBy'] . " on " . $row['date'] . "</p>";
-									if(isset($_SESSION['user'])){
-										echo "<div id=\"reply\">";
-											echo "<input type=\"submit\" value=\"Reply\" class=\"btn\" onclick=\"replyToMessage(" . $row['message_id'] . ");\">";
-										echo "</div>";
-									}
+									
 								echo "</div>";
 								echo "<div class=\"col-md-8\" style=\"word-wrap:break-word;width:200px;\">";
 									
@@ -55,6 +51,13 @@ session_start();
 										echo "Message:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 										echo $row['content'];
 										echo "</p>";
+								echo "</div>";
+								echo "<div class=\"col-md-1\">";
+									if(isset($_SESSION['user'])){
+										echo "<div id=\"reply\">";
+											echo "<input type=\"submit\" value=\"Reply\" class=\"btn\" onclick=\"replyToMessage(" . $row['message_id'] . ");\">";
+										echo "</div>";
+									}
 								echo "</div>";
 							echo "</div>";	
 						echo "</div>";
@@ -208,13 +211,9 @@ div.op{
 <div class="container-fluid" style="padding:10px"> 
 	<div class="op" style="color:white;">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<p>Posted By: <?php echo $message['postedBy'] . " on " . $message['date'];?></p>
-				<?php if(isset($_SESSION['user'])){ ?>
-					<div id="replyOP">
-						<input type="submit" value="Reply" class="btn" onclick="replyToMessage( <?php echo $message['message_id']; ?>)">
-					</div>
-				<?php } ?>
+				
 			</div>
 			<div class="col-md-8">
 				<p>
@@ -222,6 +221,13 @@ div.op{
 					Message:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<?php echo $message['content']; ?>
 				</p>
+			</div>
+			<div class="col-md-1">
+				<?php if(isset($_SESSION['user'])){ ?>
+					<div id="replyOP">
+						<input type="submit" value="Reply" class="btn" onclick="replyToMessage( <?php echo $message['message_id']; ?>)">
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
